@@ -1,0 +1,24 @@
+@if(currencies.length > 0){
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Divisa</th>
+                <th>Valor</th>
+                <th>Fecha de ultima actualización</th>
+                <th>Fecha de consulta</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (currency of currencies; track $index) {
+                <tr>
+                    <td> {{currency.code}} </td>
+                    <td> {{currency.value}} </td>
+                    <td> {{currency.lastUpdatedAt}} </td>
+                    <td> {{currency.createdAt}} </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} @else {
+    <div>No se encontraron resultados</div>
+}
