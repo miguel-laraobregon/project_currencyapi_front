@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Currency } from '../models/currency';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 export class CurrencyService {
   
-  private url: string = 'http://localhost:8080/currencies'
+  private url: string = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

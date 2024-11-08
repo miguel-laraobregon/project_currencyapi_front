@@ -1,27 +1,21 @@
 # AngularApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 17.3.11.
 
-## Development server
+## Descripción
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Esta aplicación Angular se conecta a una API backend para obtener y mostrar una lista de registros de **divisas** y sus valores actuales. La aplicación permite visualizar las divisas disponibles y sus valores.
 
-## Code scaffolding
+## Conexión con la API Backend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+La aplicación se conecta a un API backend que proporciona los registros de las divisas y sus valores. Este API debe estar corriendo en un servidor accesible para la aplicación frontend. La API responde con una lista de divisas y sus tasas de cambio actuales.
 
-## Build
+### API Backend 
+Asegúrate de tener configurada correctamente la URL de la API en el archivo de configuración de la aplicación. La URL del API backend se configura en el entorno `environment.ts`.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Servidor de desarrollo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecuta `ng serve` para iniciar un servidor de desarrollo. Navega a `http://localhost:4200/`. 
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
