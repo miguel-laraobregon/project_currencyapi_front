@@ -1,24 +1,80 @@
-@if(currencies.length > 0){
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Divisa</th>
-                <th>Valor</th>
-                <th>Fecha de ultima actualización</th>
-                <th>Fecha de consulta</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (currency of currencies; track $index) {
-                <tr>
-                    <td> {{currency.code}} </td>
-                    <td> {{currency.value}} </td>
-                    <td> {{currency.lastUpdatedAt}} </td>
-                    <td> {{currency.createdAt}} </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-} @else {
-    <div>No se encontraron resultados</div>
+<div class="row">
+    <!-- Inputs para busqueda -->
+    <div class="col">
+        <div class="form-floating">
+            <select class="form-select" id="currency-selector" [(ngModel)]="selectedCurrency" name="currency-selector">
+                <option value="all">Todas las divisas</option>
+                @if (currencies.length > 0) {
+                    @for (currency of currencies; track $index) {
+                        <option [value]="currency.code">{{currency.code}}</option>
+                    }
+                }
+            </select>
+            <label for="currency-selector">Divisas</label>
+        </div>
+    </div>
+
+    <div class="col">
+        <label for="finit">Fecha inicial</label>
+        <input type="datetime-local" id="finit" [(ngModel)]="startDate" name="finit" />
+    </div>
+
+    <div class="col">
+        <label for="fend">Fecha final</label>
+        <input type="datetime-local" id="fend" [(ngModel)]="endDate" name="fend" />
+    </div>
+
+    <div class="col">
+        <button type="button" id="btn-search" class="btn btn-primary" (click)="onSearch()">Buscar</button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Mostrar los resultados de divisas en tabla -->
+    @if(currencyValues.length > 0){
+        <div class="my-4">
+            <h5>Se encontraron {{totalElements}} resultados</h5>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Divisa</th>
+                        <th>Valor</th>
+                        <th>Fecha de ultima actualización</th>
+                        <th>Fecha de consulta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (currency of currencyValues; track $index) {
+                    <tr>
+                        <td>{{currency.code}}</td>
+                        <td>{{currency.value}}</td>
+                        <td>{{currency.lastUpdatedAt}}</td>
+                        <td>{{currency.createdAt}}</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    } @else {
+        <div class="my-4">
+            <h5>No se encontraron resultados</h5>
+        </div>
+    }
+</div>
+
+
+<!-- Nav de paginacion -->
+@if (totalPages > 1) {
+    <div class="row ">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 0">
+                    <button class="page-link" (click)="onPageChange(currentPage - 1)">Anterior</button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+                    <button class="page-link" (click)="onPageChange(currentPage + 1)">Siguiente</button>
+                </li>
+            </ul>
+        </nav>
+    </div>
 }

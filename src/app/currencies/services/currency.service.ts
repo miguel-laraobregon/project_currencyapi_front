@@ -1,21 +1,38 @@
 import { Injectable } from '@angular/core';
 import { Currency } from '../models/currency';
-import { map, Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CurrencyService {
+  
   private url: string = 'http://localhost:8080/currencies'
+
   constructor(private http: HttpClient) { }
 
-  findAllCurrencies(): Observable<Currency[]> {
-    // return of(this.currencies);
-    return this.http.get<Currency[]>(this.url).pipe(
-      map((response:any) => response as Currency[])
-    );
+  findCurrenciesCode(): Observable<Currency[]> {
+    return this.http.get<Currency[]>(this.url);
+  }
+
+  findCurrenciesValues(currencyCode: string, startDate?: string, endDate?: string, page?: number): Observable<any> {
+    let params = new HttpParams();
+
+
+    if (startDate) {
+      params = params.set('finit', startDate);
+    }
+    if (endDate) {
+      params = params.set('fend', endDate);
+    }
+
+    if (page) {
+      params = params.set('page', page);
+    }
+
+    return this.http.get<any>(`${this.url}/${currencyCode}`, { params });
   }
 }
 
